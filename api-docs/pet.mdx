@@ -1,0 +1,28 @@
+---
+title: "🐾 Pet Management"
+---
+
+# Pet Management
+
+The Pet endpoints allow you to manage pets in the store. You can create, update, find, and delete pets. Each pet has a unique ID, a name, a status, and can be associated with a category and tags.
+
+## Key Concepts
+
+- **Pet Status** — Each pet has a status: `available`, `pending`, or `sold`. Use the `findByStatus` endpoint to filter pets.
+- **Image Upload** — You can upload images for a pet using the `uploadImage` endpoint. This supports multipart form data.
+- **Tags & Categories** — Pets can be organized using tags and categories for better filtering and browsing.
+
+## Getting started
+
+To add a new pet, send a `POST` to `/pet` with the pet's details. You'll get back the pet object with its generated ID.
+
+```json
+{
+  "name": "Rex",
+  "status": "available",
+  "category": { "id": 1, "name": "Dogs" },
+  "photoUrls": ["https://example.com/rex.jpg"]
+}
+```
+
+> **Tip:** Use `findByStatus` to search for all available pets before adding duplicates.

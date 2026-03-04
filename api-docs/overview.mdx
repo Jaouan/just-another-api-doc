@@ -1,0 +1,39 @@
+---
+---
+
+## Getting Started
+
+The Petstore API provides a complete set of endpoints for managing your pet store. All requests should be made to the base URL with the appropriate HTTP method.
+
+### Authentication
+
+Most endpoints require an API key. Include it in your request headers:
+
+```bash
+curl -H "api_key: your-key-here" https://petstore.swagger.io/v2/pet/1
+```
+
+### Quick Examples
+
+**Fetch a pet by ID:**
+
+```javascript
+const response = await fetch("/v2/pet/42");
+const pet = await response.json();
+console.log(pet.name); // "Rex"
+```
+
+**Add a new pet:**
+
+```python
+import requests
+
+pet = {
+    "name": "Buddy",
+    "status": "available",
+    "category": {"id": 1, "name": "Dogs"}
+}
+response = requests.post("/v2/pet", json=pet)
+```
+
+> All responses are returned in JSON format. Error responses include a `message` field with details.

@@ -1,0 +1,21 @@
+---
+---
+
+This endpoint returns a single pet by its numeric ID. The ID must be a valid integer.
+
+## Usage Notes
+
+- Returns **404** if the pet doesn't exist or has been deleted.
+- Returns **400** if the ID is not a valid number.
+- The response includes the full pet object with all associations (category, tags, photos).
+
+## Common Patterns
+
+You can use this endpoint to check if a pet exists before performing updates:
+
+```javascript
+const pet = await fetch("/v2/pet/123").then(r => r.json());
+if (pet.status === "available") {
+  // Safe to update
+}
+```

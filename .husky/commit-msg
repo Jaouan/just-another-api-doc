@@ -1,0 +1,8 @@
+message="$(cat $1)"
+
+if [[ "${message}" =~ ^[:a-zA-Z0-9\[\s-] ]]; then
+  echo
+  echo "😱 Oops! Gitmoji is missing from your commit message. (https://gitmoji.dev)"
+  echo
+  exit 101
+fi
