@@ -1,6 +1,8 @@
-# 🫥 Just Another API Doc
+# ☕️ Just Another API Doc
 
 A modern and fast API documentation portal built with Next.js App Router and React Server Components. Designed to provide a premium developer experience with interactive features, deep MDX integration, and stunning TailwindCSS + Shadcn UI.
+
+> **Live demo : [https://just-another-api-doc.pages.dev/](https://just-another-api-doc.pages.dev/)**
 
 ## ✨ Features
 
