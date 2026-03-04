@@ -229,7 +229,7 @@ export function TryItOut({ operation }: { operation: SwaggerOperation }) {
 									setCustomBaseUrl(e.target.value);
 									localStorage.setItem("dev-portal-base-url", e.target.value);
 								}}
-								className="h-9 bg-transparent px-3 outline-none text-muted-foreground sm:w-[260px] w-[180px] shrink-0 border-r focus:bg-muted/10 transition-all hover:bg-muted/20 focus:bg-muted/20"
+								className="h-9 bg-transparent px-2 sm:px-3 outline-none text-muted-foreground w-[120px] xs:w-[150px] sm:w-[260px] shrink-0 border-r focus:bg-muted/10 transition-all hover:bg-muted/20 focus:bg-muted/20"
 								placeholder="https://api.example.com"
 								spellCheck={false}
 								aria-label="Base URL"
@@ -318,7 +318,7 @@ export function TryItOut({ operation }: { operation: SwaggerOperation }) {
 												placeholder={p.description || p.type || "value"}
 												value={paramValues[key] || ""}
 												onChange={(e) => setParam(key, e.target.value)}
-												className="h-8 text-sm font-mono bg-background flex-1"
+												className="h-8 text-sm font-mono bg-background flex-1 min-w-0"
 											/>
 										</div>
 									);

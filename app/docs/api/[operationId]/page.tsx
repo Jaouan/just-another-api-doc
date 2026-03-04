@@ -50,22 +50,22 @@ export default async function EndpointPage({
 	return (
 		<div className="space-y-10">
 			{/* Breadcrumb */}
-			<nav className="flex items-center gap-2 text-sm text-muted-foreground">
+			<nav className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mr-6">
 				<Link
 					href="/docs/api"
-					className="hover:text-foreground transition-colors"
+					className="hover:text-foreground transition-colors shrink-0"
 				>
 					API Reference
 				</Link>
-				<span>/</span>
+				<span className="shrink-0">/</span>
 				<Link
 					href={`/docs/api/tags/${(operation.tags[0] || "").toLowerCase()}`}
-					className="hover:text-foreground transition-colors capitalize"
+					className="hover:text-foreground transition-colors capitalize shrink-0"
 				>
 					{operation.tags[0] || "Endpoint"}
 				</Link>
-				<span>/</span>
-				<span className="text-foreground font-medium font-mono">
+				<span className="shrink-0">/</span>
+				<span className="text-foreground font-medium font-mono break-all">
 					{operation.operationId}
 				</span>
 			</nav>
@@ -78,11 +78,11 @@ export default async function EndpointPage({
 			/>
 
 			{/* Prev/Next navigation */}
-			<div className="border-t pt-6 flex items-stretch gap-4">
+			<div className="border-t pt-6 flex flex-col sm:flex-row items-stretch gap-4">
 				{prevOp ? (
 					<Link
 						href={`/docs/api/${prevOp.operationId}`}
-						className="flex-1 group flex items-center gap-3 rounded-lg border p-4 transition-all hover:border-primary/30 hover:bg-accent/50"
+						className="flex-1 group flex items-center gap-3 rounded-lg border p-4 transition-all hover:border-primary/30 hover:bg-accent/50 w-full sm:w-auto"
 					>
 						<ArrowLeft className="size-4 text-muted-foreground group-hover:text-foreground group-hover:-translate-x-0.5 transition-all shrink-0" />
 						<div className="min-w-0">
@@ -93,12 +93,12 @@ export default async function EndpointPage({
 						</div>
 					</Link>
 				) : (
-					<div className="flex-1" />
+					<div className="hidden sm:block flex-1" />
 				)}
 				{nextOp ? (
 					<Link
 						href={`/docs/api/${nextOp.operationId}`}
-						className="flex-1 group flex items-center justify-end gap-3 rounded-lg border p-4 transition-all hover:border-primary/30 hover:bg-accent/50 text-right"
+						className="flex-1 group flex items-center justify-end gap-3 rounded-lg border p-4 transition-all hover:border-primary/30 hover:bg-accent/50 text-right w-full sm:w-auto"
 					>
 						<div className="min-w-0">
 							<p className="text-xs text-muted-foreground">Next</p>
@@ -109,7 +109,7 @@ export default async function EndpointPage({
 						<ArrowRight className="size-4 text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 transition-all shrink-0" />
 					</Link>
 				) : (
-					<div className="flex-1" />
+					<div className="hidden sm:block flex-1" />
 				)}
 			</div>
 		</div>

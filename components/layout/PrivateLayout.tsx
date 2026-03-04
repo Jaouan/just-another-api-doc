@@ -7,6 +7,8 @@ export const PrivateLayout: FC<PropsWithChildren> = ({ children }) => (
 	<SidebarProvider>
 		<MobileNavBar />
 		<AppSidebar />
-		<main className="px-8 py-4 max-md:pt-18 w-full">{children}</main>
+		<main className="px-4 sm:px-8 py-4 max-md:pt-18 w-full min-w-0">
+			{children}
+		</main>
 	</SidebarProvider>
 );

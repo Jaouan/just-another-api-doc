@@ -3,7 +3,7 @@ import { getGroupDoc, getGroupTitle } from "@/lib/api-docs";
 import { MdxContent } from "@/components/api-docs/MdxContent";
 import { MethodBadge } from "@/components/api-docs/MethodBadge";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -44,16 +44,18 @@ export default async function TagGroupPage({
 	return (
 		<div className="space-y-8">
 			{/* Breadcrumb */}
-			<nav className="flex items-center gap-2 text-sm text-muted-foreground">
+			<nav className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mr-6">
 				<Link
 					href="/docs/api"
-					className="hover:text-foreground transition-colors flex items-center gap-1"
+					className="hover:text-foreground transition-colors flex items-center gap-1 shrink-0"
 				>
 					<ArrowLeft className="size-3.5" />
 					API Reference
 				</Link>
-				<span>/</span>
-				<span className="text-foreground font-medium">{displayTitle}</span>
+				<span className="shrink-0">/</span>
+				<span className="text-foreground font-medium shrink-0 break-words">
+					{displayTitle}
+				</span>
 			</nav>
 
 			{/* Header */}
@@ -79,17 +81,23 @@ export default async function TagGroupPage({
 						<Link
 							key={op.operationId}
 							href={`/docs/api/${op.operationId}`}
-							className="flex items-center gap-3 rounded-lg border p-3 transition-all hover:border-primary/30 hover:bg-accent/50 group"
+							className="group flex flex-col sm:flex-row sm:items-center gap-3 rounded-lg border bg-card p-3 transition-all hover:border-primary/30 hover:bg-accent/50 hover:shadow-sm"
 						>
-							<MethodBadge method={op.method} />
-							<code className="text-sm font-mono font-medium text-foreground/80 group-hover:text-foreground transition-colors">
-								{op.path}
-							</code>
+							<div className="flex items-center gap-3 min-w-0">
+								<MethodBadge method={op.method} />
+								<code className="font-mono text-sm font-medium flex-shrink-0 truncate sm:break-all sm:truncate-none group-hover:text-foreground transition-colors">
+									{op.path}
+								</code>
+							</div>
 							{op.summary && (
-								<span className="text-sm text-muted-foreground ml-auto hidden sm:block truncate max-w-[200px]">
+								<span className="text-sm text-muted-foreground truncate w-full flex-1">
 									{op.summary}
 								</span>
 							)}
+							<div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 mt-3 sm:mt-0 w-full sm:w-auto">
+								<div className="flex-1 sm:hidden"></div>
+								<ArrowRight className="size-4 text-muted-foreground/50 group-hover:text-foreground group-hover:translate-x-0.5 transition-all shrink-0" />
+							</div>
 						</Link>
 					))}
 				</div>

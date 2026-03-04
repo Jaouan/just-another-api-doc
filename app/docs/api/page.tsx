@@ -41,25 +41,30 @@ export default function ApiOverviewPage() {
 								<Link
 									key={op.operationId}
 									href={`/docs/api/${op.operationId}`}
-									className="group flex items-center gap-3 rounded-lg border bg-card p-4 transition-all hover:border-primary/30 hover:bg-accent/50 hover:shadow-sm"
+									className="group flex flex-col sm:flex-row sm:items-center gap-3 rounded-lg border bg-card p-4 transition-all hover:border-primary/30 hover:bg-accent/50 hover:shadow-sm"
 								>
-									<MethodBadge method={op.method} />
-									<code className="font-mono text-sm font-medium flex-shrink-0">
-										{op.path}
-									</code>
-									<span className="text-sm text-muted-foreground truncate flex-1">
+									<div className="flex items-center gap-3 min-w-0">
+										<MethodBadge method={op.method} />
+										<code className="font-mono text-sm font-medium flex-shrink-0 truncate sm:break-all sm:truncate-none">
+											{op.path}
+										</code>
+									</div>
+									<span className="text-sm text-muted-foreground truncate flex-1 block w-full">
 										{op.summary}
 									</span>
-									{op.deprecated && (
-										<Badge
-											variant="outline"
-											className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/25 gap-1 text-[10px] shrink-0"
-										>
-											<AlertTriangle className="size-2.5" />
-											Deprecated
-										</Badge>
-									)}
-									<ArrowRight className="size-4 text-muted-foreground/50 group-hover:text-foreground group-hover:translate-x-0.5 transition-all shrink-0" />
+									<div className="flex items-center justify-between sm:justify-end gap-3 shrink-0 mt-3 sm:mt-0 w-full sm:w-auto">
+										<div className="flex-1 sm:hidden"></div>
+										{op.deprecated && (
+											<Badge
+												variant="outline"
+												className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/25 gap-1 text-[10px] shrink-0"
+											>
+												<AlertTriangle className="size-2.5" />
+												Deprecated
+											</Badge>
+										)}
+										<ArrowRight className="size-4 text-muted-foreground/50 group-hover:text-foreground group-hover:translate-x-0.5 transition-all shrink-0" />
+									</div>
 								</Link>
 							))}
 						</div>
