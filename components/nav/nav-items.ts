@@ -1,11 +1,11 @@
-import { Activity } from "lucide-react";
+import { Github } from "lucide-react";
 
 export default {
 	navMain: [
 		{
-			title: "Useless",
-			url: "#",
-			icon: Activity,
+			title: "Github",
+			url: "https://github.com/Jaouan/just-another-api-doc",
+			icon: Github,
 			/*items: [
 				{ title: "Foo", url: "#" },
 				{ title: "Bar", url: "#" },

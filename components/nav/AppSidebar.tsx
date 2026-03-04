@@ -21,7 +21,7 @@ export const AppSidebar: FC<React.ComponentProps<typeof Sidebar>> = (props) => (
 			<SearchInput className="group-data-[state=collapsed]:hidden" />
 		</SidebarHeader>
 		<SidebarContent>
-			<NavGeneric title="Group" items={navItems.navMain} />
+			<NavGeneric title="Just a group" items={navItems.navMain} />
 			<NavApiEndpoints />
 		</SidebarContent>
 		<SidebarFooter>
