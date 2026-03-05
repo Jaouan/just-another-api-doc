@@ -1,12 +1,12 @@
 import type { SwaggerOperation } from "@/lib/swagger";
-import { generateCodeExamples, resolveSchema } from "@/lib/swagger";
+import { resolveSchema } from "@/lib/swagger";
 import { MethodBadge } from "./MethodBadge";
 import { ParameterTable } from "./ParameterTable";
 import { ResponseSection } from "./ResponseSection";
-import { CodeExample } from "./CodeExample";
+import { LiveCodeExamples } from "./LiveCodeExamples";
 import { SchemaViewer } from "./SchemaViewer";
 import { TryItOut } from "./TryItOut";
-import { MdxContent } from "./MdxContent";
+
 import { Badge } from "@/components/ui/badge";
 import { AlertTriangle } from "lucide-react";
 
@@ -17,7 +17,6 @@ export function EndpointCard({
 	operation: SwaggerOperation;
 	customDoc?: React.ReactNode;
 }) {
-	const examples = generateCodeExamples(operation);
 	const nonBodyParams = operation.parameters.filter((p) => p.in !== "body");
 	const bodyParam = operation.parameters.find((p) => p.in === "body");
 	const bodySchema = bodyParam?.schema ? resolveSchema(bodyParam.schema) : null;
@@ -125,31 +124,16 @@ export function EndpointCard({
 				<ResponseSection responses={operation.responses} />
 			</div>
 
-			{/* Try it out */}
-			<TryItOut operation={operation} />
-
 			{/* Code Examples */}
 			<div className="space-y-3">
 				<h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
 					Code Examples
 				</h3>
-				<CodeExample
-					examples={examples}
-					renderedExamples={{
-						curl: (
-							<MdxContent source={`\`\`\`bash\n${examples.curl}\n\`\`\``} />
-						),
-						javascript: (
-							<MdxContent
-								source={`\`\`\`javascript\n${examples.javascript}\n\`\`\``}
-							/>
-						),
-						python: (
-							<MdxContent source={`\`\`\`python\n${examples.python}\n\`\`\``} />
-						),
-					}}
-				/>
+				<LiveCodeExamples operation={operation} />
 			</div>
+
+			{/* Try it out */}
+			<TryItOut operation={operation} />
 		</div>
 	);
 }

@@ -68,12 +68,22 @@ export function getAvailableGroupDocs(): string[] {
 		.map((f) => f.replace(".mdx", ""));
 }
 
+// ─── Config ──────────────────────────────────────────────────────────────────
+
+const configPath = path.join(API_DOCS_DIR, "config.json");
+const config: { groupTitles?: Record<string, string> } = fs.existsSync(
+	configPath,
+)
+	? JSON.parse(fs.readFileSync(configPath, "utf-8"))
+	: {};
+
 /**
- * Get the display title for a tag group, using MDX frontmatter override if available
+ * Get the display title for a tag group, using config.json groupTitles
  */
 export function getGroupTitle(tag: string, fallback?: string): string {
-	const doc = getGroupDoc(tag);
-	return doc?.title || fallback || tag;
+	const configTitle =
+		config.groupTitles?.[tag.toLowerCase()] ?? config.groupTitles?.[tag];
+	return configTitle || fallback || tag;
 }
 
 /**

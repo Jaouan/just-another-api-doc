@@ -1,4 +1,5 @@
-import swaggerSpec from "@/api-docs/swagger.json";
+// @ts-expect-error — YAML file is handled by yaml-loader in webpack config
+import swaggerSpec from "@/api-docs/api.aos3.yml";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -72,7 +73,7 @@ export interface SwaggerInfo {
 
 // ─── Spec access ─────────────────────────────────────────────────────────────
 
-const spec = swaggerSpec as Record<string, unknown>;
+const spec = swaggerSpec;
 
 export function getSwaggerInfo(): SwaggerInfo {
 	const info = spec.info as Record<string, unknown>;
@@ -175,12 +176,17 @@ export function getOperationsByTag(): Record<string, SwaggerOperation[]> {
 
 // ─── Code examples ───────────────────────────────────────────────────────────
 
-export function generateCodeExamples(op: SwaggerOperation): {
+export function generateCodeExamples(
+	op: SwaggerOperation,
+	options?: { baseUrl?: string; authToken?: string },
+): {
 	curl: string;
 	javascript: string;
 	python: string;
 } {
-	const baseUrl = `${getSchemes()[0]}://${getHost()}${getBasePath()}`;
+	const defaultBaseUrl = `${getSchemes()[0]}://${getHost()}${getBasePath()}`;
+	const baseUrl = (options?.baseUrl || defaultBaseUrl).replace(/\/$/, "");
+	const authToken = options?.authToken?.trim() || "";
 	const fullPath = `${baseUrl}${op.path}`;
 
 	// Build query params
@@ -202,6 +208,7 @@ export function generateCodeExamples(op: SwaggerOperation): {
 
 	// ─ curl ─
 	let curl = `curl -X ${op.method} "${urlWithQuery}"`;
+	curl += ` \\\n  -H "Authorization: Bearer ${authToken || "${API_TOKEN}"}"`;
 	if (bodyJson) {
 		curl += ` \\\n  -H "Content-Type: application/json" \\\n  -d '${bodyJson}'`;
 	}
@@ -210,22 +217,42 @@ export function generateCodeExamples(op: SwaggerOperation): {
 	}
 
 	// ─ JavaScript ─
-	const fetchOptions: string[] = [`  method: "${op.method}"`];
+	const jsHeaders: string[] = [];
+	jsHeaders.push(
+		`    "Authorization": \`Bearer ${authToken || "${API_TOKEN}"}\``,
+	);
 	if (bodyJson) {
-		fetchOptions.push('  headers: { "Content-Type": "application/json" }');
+		jsHeaders.push('    "Content-Type": "application/json"');
+	}
+
+	const fetchOptions: string[] = [`  method: "${op.method}"`];
+	if (jsHeaders.length > 0) {
+		fetchOptions.push(`  headers: {\n${jsHeaders.join(",\n")}\n  }`);
+	}
+	if (bodyJson) {
 		fetchOptions.push(`  body: JSON.stringify(${bodyJson})`);
 	}
 	const javascript = `const response = await fetch("${urlWithQuery}", {\n${fetchOptions.join(",\n")}\n});\nconst data = await response.json();`;
 
 	// ─ Python ─
-	let python = `import requests\n\n`;
+	let python = "import requests\n\n";
+	const pyHeaders: string[] = [];
+	pyHeaders.push(`    "Authorization": "Bearer ${authToken || "<token>"}"`);
+	const pyHeadersStr =
+		pyHeaders.length > 0 ? `headers = {\n${pyHeaders.join(",\n")}\n}\n\n` : "";
+	python += pyHeadersStr;
+
+	const pyKwargs: string[] = [];
+	if (pyHeaders.length > 0) pyKwargs.push("headers=headers");
 	if (bodyJson) {
 		python += `payload = ${bodyJson}\n\n`;
-		python += `response = requests.${op.method.toLowerCase()}(\n  "${urlWithQuery}",\n  json=payload\n)`;
-	} else {
-		python += `response = requests.${op.method.toLowerCase()}("${urlWithQuery}")`;
+		pyKwargs.push("json=payload");
 	}
-	python += `\ndata = response.json()`;
+
+	const pyKwargsStr =
+		pyKwargs.length > 0 ? `,\n  ${pyKwargs.join(",\n  ")}` : "";
+	python += `response = requests.${op.method.toLowerCase()}(\n  "${urlWithQuery}"${pyKwargsStr}\n)`;
+	python += "\ndata = response.json()";
 
 	return { curl, javascript, python };
 }

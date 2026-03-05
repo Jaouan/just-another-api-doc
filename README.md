@@ -6,7 +6,7 @@ A modern and fast API documentation portal built with Next.js App Router and Rea
 
 ## ✨ Features
 
-- **OpenAPI / Swagger Parsing**: Automatically generates comprehensive documentation pages from your `openapi.json` or `swagger.json` specs.
+- **OpenAPI / Swagger Parsing**: Automatically generates comprehensive documentation pages from your OpenAPI/Swagger spec (YAML or JSON).
 - **Interactive "Try it out"**: Test API endpoints directly from the browser!
   - Fully responsive, native-feeling Input forms.
   - Persistent `Authorization` headers (Bearer tokens) saved in `localStorage`.
@@ -31,7 +31,7 @@ A modern and fast API documentation portal built with Next.js App Router and Rea
    ```
 
 3. **Configure your API**
-   - Place your Swagger/OpenAPI JSON file in `api-docs/swagger.json`.
+   - Place your Swagger/OpenAPI spec file in `api-docs/api.aos3.yml`.
    - Update `api-docs/config.json` to configure sidebar groups, tag names, and metadata.
    - Add `{HTTP_METHOD}-{operationId}.mdx` files in the `api-docs/` folder to enrich specific endpoints with custom markdown guides.
    - Add `overview.mdx` in the `api-docs/` folder to customize the API Reference landing page.

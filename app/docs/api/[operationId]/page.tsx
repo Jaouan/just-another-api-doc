@@ -1,5 +1,5 @@
 import { getAllOperations, getOperationBySlug } from "@/lib/swagger";
-import { getEndpointDoc } from "@/lib/api-docs";
+import { getEndpointDoc, getGroupTitle } from "@/lib/api-docs";
 import { EndpointCard } from "@/components/api-docs/EndpointCard";
 import { MdxContent } from "@/components/api-docs/MdxContent";
 import { notFound } from "next/navigation";
@@ -39,6 +39,8 @@ export default async function EndpointPage({
 
 	// MDX manual doc
 	const endpointDoc = getEndpointDoc(operation.method, operationId);
+	const tagId = operation.tags[0] || "";
+	const tagLabel = getGroupTitle(tagId, tagId);
 
 	// Navigation
 	const allOps = getAllOperations();
@@ -59,14 +61,14 @@ export default async function EndpointPage({
 				</Link>
 				<span className="shrink-0">/</span>
 				<Link
-					href={`/docs/api/tags/${(operation.tags[0] || "").toLowerCase()}`}
-					className="hover:text-foreground transition-colors capitalize shrink-0"
+					href={`/docs/api/tags/${tagId.toLowerCase()}`}
+					className="hover:text-foreground transition-colors shrink-0"
 				>
-					{operation.tags[0] || "Endpoint"}
+					{tagLabel}
 				</Link>
 				<span className="shrink-0">/</span>
 				<span className="text-foreground font-medium font-mono break-all">
-					{operation.operationId}
+					{operation.method} {operation.path}
 				</span>
 			</nav>
 

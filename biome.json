@@ -32,7 +32,8 @@
 			},
 			"suspicious": {
 				"noArrayIndexKey": "off",
-				"noUnknownAtRules": "off"
+				"noUnknownAtRules": "off",
+				"noTemplateCurlyInString": "off"
 			}
 		}
 	},

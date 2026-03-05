@@ -3,7 +3,7 @@ import { getGroupDoc, getGroupTitle } from "@/lib/api-docs";
 import { MdxContent } from "@/components/api-docs/MdxContent";
 import { MethodBadge } from "@/components/api-docs/MethodBadge";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
@@ -39,7 +39,7 @@ export default async function TagGroupPage({
 	const operationsByTag = getOperationsByTag();
 	const ops = operationsByTag[tagInfo.name] || [];
 	const groupDoc = getGroupDoc(tag);
-	const displayTitle = groupDoc?.title || tagInfo.name;
+	const displayTitle = getGroupTitle(tag, tagInfo.name);
 
 	return (
 		<div className="space-y-8">
@@ -47,9 +47,8 @@ export default async function TagGroupPage({
 			<nav className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground mr-6">
 				<Link
 					href="/docs/api"
-					className="hover:text-foreground transition-colors flex items-center gap-1 shrink-0"
+					className="hover:text-foreground transition-colors shrink-0"
 				>
-					<ArrowLeft className="size-3.5" />
 					API Reference
 				</Link>
 				<span className="shrink-0">/</span>

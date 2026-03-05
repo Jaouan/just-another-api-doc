@@ -3,14 +3,6 @@ import { LandingNavBar } from "@/components/nav/LandingNavBar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
-const _imageLogos = [
-	{
-		src: "/google-brand.svg",
-		alt: "Company 1",
-		href: "https://company1.com",
-	},
-];
-
 export default function HomePage() {
 	return (
 		<main className="relative">

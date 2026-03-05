@@ -22,6 +22,12 @@ export function CodeExample({
 	};
 }) {
 	const [copied, setCopied] = useState<string | null>(null);
+	const [selectedLang, setSelectedLang] = useState(() => {
+		if (typeof window !== "undefined") {
+			return localStorage.getItem("dev-portal-code-lang") || "curl";
+		}
+		return "curl";
+	});
 
 	const copyToClipboard = (text: string, lang: string) => {
 		navigator.clipboard.writeText(text);
@@ -30,7 +36,14 @@ export function CodeExample({
 	};
 
 	return (
-		<Tabs defaultValue="curl" className="w-full">
+		<Tabs
+			value={selectedLang}
+			onValueChange={(v) => {
+				setSelectedLang(v);
+				localStorage.setItem("dev-portal-code-lang", v);
+			}}
+			className="w-full"
+		>
 			<TabsList className="bg-muted/60 h-8">
 				<TabsTrigger value="curl" className="text-xs px-3 h-6">
 					cURL

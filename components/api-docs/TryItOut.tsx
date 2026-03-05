@@ -4,7 +4,8 @@ import { useState, useCallback, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import type { SwaggerOperation } from "@/lib/swagger";
-import { getHost, getBasePath, getSchemes, resolveSchema } from "@/lib/swagger";
+import { resolveSchema } from "@/lib/swagger";
+import { useApiSettingsStore } from "@/stores/useApiSettingsStore";
 import {
 	Play,
 	Loader2,
@@ -47,22 +48,18 @@ export function TryItOut({ operation }: { operation: SwaggerOperation }) {
 	const [error, setError] = useState<string | null>(null);
 	const [isOpen, setIsOpen] = useState(false);
 	const [copied, setCopied] = useState(false);
-	const [authToken, setAuthToken] = useState("");
 
-	const defaultBaseUrl = `${getSchemes()[0] || "http"}://${getHost()}${getBasePath()}`;
-	const [customBaseUrl, setCustomBaseUrl] = useState(defaultBaseUrl);
+	const {
+		baseUrl: customBaseUrl,
+		authToken,
+		setBaseUrl: setCustomBaseUrl,
+		setAuthToken,
+		hydrate,
+	} = useApiSettingsStore();
 
 	useEffect(() => {
-		const savedToken = localStorage.getItem("dev-portal-auth-token");
-		if (savedToken) {
-			setAuthToken(savedToken);
-		}
-
-		const savedBaseUrl = localStorage.getItem("dev-portal-base-url");
-		if (savedBaseUrl) {
-			setCustomBaseUrl(savedBaseUrl);
-		}
-	}, []);
+		hydrate();
+	}, [hydrate]);
 
 	const setParam = useCallback((key: string, value: string) => {
 		setParamValues((prev) => ({ ...prev, [key]: value }));
@@ -225,10 +222,7 @@ export function TryItOut({ operation }: { operation: SwaggerOperation }) {
 							<input
 								type="text"
 								value={customBaseUrl}
-								onChange={(e) => {
-									setCustomBaseUrl(e.target.value);
-									localStorage.setItem("dev-portal-base-url", e.target.value);
-								}}
+								onChange={(e) => setCustomBaseUrl(e.target.value)}
 								className="h-9 bg-transparent px-2 sm:px-3 outline-none text-muted-foreground w-[120px] xs:w-[150px] sm:w-[260px] shrink-0 border-r focus:bg-muted/10 transition-all hover:bg-muted/20 focus:bg-muted/20"
 								placeholder="https://api.example.com"
 								spellCheck={false}
@@ -246,7 +240,7 @@ export function TryItOut({ operation }: { operation: SwaggerOperation }) {
 							Authorization
 						</h4>
 						<div className="flex flex-col sm:flex-row sm:items-start sm:pt-1 gap-2 sm:gap-4 group">
-							<div className="flex items-center gap-2 sm:w-[200px] shrink-0">
+							<div className="flex items-center self-center gap-2 sm:w-[200px] shrink-0">
 								<Badge
 									variant="outline"
 									className="text-[9px] font-mono px-1.5 py-0 h-4 shrink-0"
@@ -267,13 +261,7 @@ export function TryItOut({ operation }: { operation: SwaggerOperation }) {
 								<input
 									type="text"
 									value={authToken}
-									onChange={(e) => {
-										setAuthToken(e.target.value);
-										localStorage.setItem(
-											"dev-portal-auth-token",
-											e.target.value,
-										);
-									}}
+									onChange={(e) => setAuthToken(e.target.value)}
 									placeholder="your-token-here"
 									className="flex-1 h-full w-full bg-transparent pr-3 py-1 text-base md:text-sm font-mono outline-none placeholder:text-muted-foreground"
 								/>
@@ -295,7 +283,7 @@ export function TryItOut({ operation }: { operation: SwaggerOperation }) {
 											key={key}
 											className="flex flex-col sm:flex-row sm:items-start sm:pt-1 gap-2 sm:gap-4 group"
 										>
-											<div className="flex items-center gap-2 sm:w-[200px] shrink-0">
+											<div className="flex items-center self-center gap-2 sm:w-[200px] shrink-0">
 												<Badge
 													variant="outline"
 													className="text-[9px] font-mono px-1.5 py-0 h-4 shrink-0"
