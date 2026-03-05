@@ -70,20 +70,20 @@ export function getAvailableGroupDocs(): string[] {
 
 // ─── Config ──────────────────────────────────────────────────────────────────
 
-const configPath = path.join(API_DOCS_DIR, "config.json");
-const config: { groupTitles?: Record<string, string> } = fs.existsSync(
-	configPath,
-)
-	? JSON.parse(fs.readFileSync(configPath, "utf-8"))
-	: {};
+import apiDocsConfig from "@/api-docs/config";
 
 /**
- * Get the display title for a tag group, using config.json groupTitles
+ * Get the display title for a tag group from config.tsx
  */
 export function getGroupTitle(tag: string, fallback?: string): string {
-	const configTitle =
-		config.groupTitles?.[tag.toLowerCase()] ?? config.groupTitles?.[tag];
-	return configTitle || fallback || tag;
+	return apiDocsConfig.groups[tag.toLowerCase()]?.title || fallback || tag;
+}
+
+/**
+ * Get the icon component for a tag group from config.tsx
+ */
+export function getGroupIcon(tag: string) {
+	return apiDocsConfig.groups[tag.toLowerCase()]?.icon;
 }
 
 /**

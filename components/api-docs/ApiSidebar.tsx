@@ -22,9 +22,7 @@ import {
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { NavCollapsible } from "@/components/nav/NavCollapsible";
-import apiDocsConfig from "@/api-docs/config.json";
-
-const groupTitles = apiDocsConfig.groupTitles as Record<string, string>;
+import apiDocsConfig from "@/api-docs/config";
 
 export function NavApiEndpoints() {
 	const pathname = usePathname();
@@ -74,7 +72,9 @@ export function NavApiEndpoints() {
 				{tags.map((tag) => {
 					const ops = operationsByTag[tag.name] || [];
 					const tagKey = tag.name.toLowerCase();
-					const displayTitle = groupTitles[tagKey] || tag.name;
+					const groupCfg = apiDocsConfig.groups[tagKey];
+					const displayTitle = groupCfg?.title || tag.name;
+					const IconComponent = groupCfg?.icon || TbApi;
 					const isActive =
 						pathname === `/docs/api/tags/${tagKey}` ||
 						ops.some((op) => pathname === `/docs/api/${op.operationId}`);
@@ -96,7 +96,7 @@ export function NavApiEndpoints() {
 										tooltip={displayTitle}
 										className="text-foreground/70 cursor-pointer hover:bg-foreground/5"
 									>
-										<TbApi className="shrink-0" />
+										<IconComponent className="shrink-0" />
 										<Link
 											href={`/docs/api/tags/${tagKey}`}
 											className="truncate hover:text-foreground transition-colors"

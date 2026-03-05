@@ -1,5 +1,5 @@
 import { getTags, getOperationsByTag } from "@/lib/swagger";
-import { getGroupDoc, getGroupTitle } from "@/lib/api-docs";
+import { getGroupDoc, getGroupTitle, getGroupIcon } from "@/lib/api-docs";
 import { MdxContent } from "@/components/api-docs/MdxContent";
 import { MethodBadge } from "@/components/api-docs/MethodBadge";
 import Link from "next/link";
@@ -40,6 +40,7 @@ export default async function TagGroupPage({
 	const ops = operationsByTag[tagInfo.name] || [];
 	const groupDoc = getGroupDoc(tag);
 	const displayTitle = getGroupTitle(tag, tagInfo.name);
+	const IconComponent = getGroupIcon(tag);
 
 	return (
 		<div className="space-y-8">
@@ -59,7 +60,8 @@ export default async function TagGroupPage({
 
 			{/* Header */}
 			<div className="space-y-2">
-				<h1 className="text-3xl font-bold tracking-tight capitalize">
+				<h1 className="text-3xl font-bold tracking-tight capitalize flex items-center gap-3">
+					{IconComponent && <IconComponent className="size-8" />}
 					{displayTitle}
 				</h1>
 				{tagInfo.description && (
