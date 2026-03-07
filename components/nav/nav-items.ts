@@ -1,4 +1,4 @@
-import { Github } from "lucide-react";
+import { Activity, Github } from "lucide-react";
 
 export default {
 	navMain: [
@@ -10,6 +10,11 @@ export default {
 				{ title: "Foo", url: "#" },
 				{ title: "Bar", url: "#" },
 			],*/
+		},
+		{
+			title: "Status",
+			url: "/status",
+			icon: Activity,
 		},
 	],
 };
