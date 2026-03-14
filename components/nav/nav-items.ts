@@ -1,4 +1,4 @@
-import { Activity, Github } from "lucide-react";
+import { Activity, Github, Milestone } from "lucide-react";
 
 export default {
 	navMain: [
@@ -10,6 +10,11 @@ export default {
 				{ title: "Foo", url: "#" },
 				{ title: "Bar", url: "#" },
 			],*/
+		},
+		{
+			title: "Roadmap",
+			url: "/roadmap",
+			icon: Milestone,
 		},
 		{
 			title: "Status",
