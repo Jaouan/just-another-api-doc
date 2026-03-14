@@ -23,8 +23,8 @@ export async function generateMetadata({
 	if (!operation) return { title: "Not Found" };
 
 	return {
-		title: `${operation.method} ${operation.path} — API Reference`,
-		description: operation.summary || operation.description,
+		title: `${operation.summary || operation.operationId} — API Reference`,
+		description: operation.description,
 	};
 }
 
@@ -67,8 +67,8 @@ export default async function EndpointPage({
 					{tagLabel}
 				</Link>
 				<span className="shrink-0">/</span>
-				<span className="text-foreground font-medium font-mono break-all">
-					{operation.method} {operation.path}
+				<span className="text-foreground font-medium break-all first-letter:capitalize">
+					{operation.summary || operation.operationId}
 				</span>
 			</nav>
 

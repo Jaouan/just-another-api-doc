@@ -79,20 +79,18 @@ export const SearchInput: FC<PropsWithStyle> = ({ className }) => {
 								}}
 								className="flex flex-col items-start gap-1 py-2.5"
 							>
-								<div className="flex items-center gap-2">
+								<span className="text-sm font-medium truncate w-full first-letter:capitalize">
+									{item.summary || item.title || item.description || "Endpoint"}
+								</span>
+								<div className="flex items-center gap-1">
 									<MethodBadge
 										method={item.method || ""}
-										className="text-[9px] px-1.5 py-0 h-4 scale-[0.9] shrink-0"
+										className="text-xs shrink-0"
 									/>
-									<span className="font-mono text-sm font-medium truncate">
+									<span className="font-mono text-xs text-muted-foreground truncate">
 										{item.path}
 									</span>
 								</div>
-								{item.summary && (
-									<span className="text-xs text-muted-foreground truncate w-full">
-										{item.summary}
-									</span>
-								)}
 							</CommandItem>
 						))}
 					</CommandGroup>
