@@ -124,7 +124,7 @@ export function NavApiEndpoints() {
 														<Link href={`/docs/api/${op.operationId}`}>
 															<div className="flex flex-col gap-0.5 w-full">
 																<div className="flex items-center gap-1">
-																	<span className="min-w-[3rem] inline-flex justify-start shrink-0 scale-[0.8]">
+																	<span className="min-w-[2.5rem] inline-flex justify-start shrink-0 scale-[0.8]">
 																		<MethodBadge
 																			method={op.method}
 																			className="text-[9px] px-1.5 py-0 h-4"
@@ -135,7 +135,7 @@ export function NavApiEndpoints() {
 																	</span>
 																</div>
 																{op.summary && (
-																	<span className="text-[10px] text-muted-foreground truncate w-full pl-[3.25rem]">
+																	<span className="text-[10px] text-muted-foreground truncate w-full pl-1">
 																		{op.summary}
 																	</span>
 																)}

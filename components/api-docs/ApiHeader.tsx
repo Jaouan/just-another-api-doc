@@ -19,7 +19,7 @@ export function ApiHeader() {
 					<Button variant="outline" size="sm" asChild>
 						<a href="/api.aos3.yml" download>
 							<Download className="mr-2 h-4 w-4" />
-							Download OpenAPI
+							OpenAPI spec
 						</a>
 					</Button>
 				</div>
