@@ -123,7 +123,7 @@ export function NavApiEndpoints() {
 													>
 														<Link href={`/docs/api/${op.operationId}`}>
 															<div className="flex flex-col gap-0.5 w-full">
-																<span className="text-sm font-medium truncate w-full">
+																<span className="text-sm font-medium truncate w-full first-letter:capitalize">
 																	{op.summary || op.operationId || "Endpoint"}
 																</span>
 																<div className="flex items-center gap-1">

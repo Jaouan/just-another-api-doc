@@ -79,7 +79,7 @@ export const SearchInput: FC<PropsWithStyle> = ({ className }) => {
 								}}
 								className="flex flex-col items-start gap-1 py-2.5"
 							>
-								<span className="text-sm font-medium truncate w-full">
+								<span className="text-sm font-medium truncate w-full first-letter:capitalize">
 									{item.summary || item.title || item.description || "Endpoint"}
 								</span>
 								<div className="flex items-center gap-2">

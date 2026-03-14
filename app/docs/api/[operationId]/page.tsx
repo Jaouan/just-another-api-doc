@@ -67,7 +67,7 @@ export default async function EndpointPage({
 					{tagLabel}
 				</Link>
 				<span className="shrink-0">/</span>
-				<span className="text-foreground font-medium break-all">
+				<span className="text-foreground font-medium break-all first-letter:capitalize">
 					{operation.summary || operation.operationId}
 				</span>
 			</nav>

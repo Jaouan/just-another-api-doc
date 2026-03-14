@@ -25,6 +25,11 @@ export function EndpointCard({
 		<div className="space-y-8">
 			{/* Header */}
 			<div className="space-y-3">
+				{operation.summary && (
+					<h2 className="text-xl font-semibold first-letter:capitalize">
+						{operation.summary}
+					</h2>
+				)}
 				<div className="flex items-center gap-3 flex-wrap">
 					<MethodBadge method={operation.method} />
 					<code className="text-lg font-mono font-semibold break-all">
@@ -40,9 +45,6 @@ export function EndpointCard({
 						</Badge>
 					)}
 				</div>
-				{operation.summary && (
-					<h2 className="text-xl font-semibold">{operation.summary}</h2>
-				)}
 				{!customDoc && operation.description && (
 					<p className="text-muted-foreground leading-relaxed">
 						{operation.description}
