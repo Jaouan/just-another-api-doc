@@ -31,7 +31,7 @@ A modern and fast API documentation portal built with Next.js App Router and Rea
    ```
 
 3. **Configure your API**
-   - Place your Swagger/OpenAPI spec file in `api-docs/api.aos3.yml`.
+   - Place your Swagger/OpenAPI spec file in `public/api.aos3.yml`.
    - Update `api-docs/config.tsx` to configure group titles, icons, and metadata.
    - Add `{HTTP_METHOD}-{operationId}.mdx` files in the `api-docs/` folder to enrich specific endpoints with custom markdown guides.
    - Add `overview.mdx` in the `api-docs/` folder to customize the API Reference landing page.
