@@ -48,7 +48,8 @@ const typeIconMap: Record<NoteType, React.ElementType> = {
 };
 
 const typeColorMap: Record<NoteType, string> = {
-	feature: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/25",
+	feature:
+		"bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/25",
 	bugfix: "bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/25",
 	refactor:
 		"bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/25",
@@ -68,18 +69,12 @@ function ReleaseCard({ release }: { release: Release }) {
 					<CardTitle className="text-xl">{release.version}</CardTitle>
 					<div className="flex items-center gap-2">
 						{release.status === "current" && (
-							<Badge
-								variant="outline"
-								className="bg-primary/10 text-primary border-primary/20"
-							>
+							<Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
 								Current
 							</Badge>
 						)}
 						{release.status === "next" && (
-							<Badge
-								variant="outline"
-								className="bg-amber-500/10 text-amber-600 border-amber-500/20"
-							>
+							<Badge variant="outline" className="bg-amber-500/10 text-amber-600 border-amber-500/20">
 								Next
 							</Badge>
 						)}
@@ -134,8 +129,12 @@ export default function RoadmapPage() {
 
 			{/* Current & Next */}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-				{currentRelease && <ReleaseCard release={currentRelease} />}
-				{nextRelease && <ReleaseCard release={nextRelease} />}
+				{currentRelease && (
+					<ReleaseCard release={currentRelease} />
+				)}
+				{nextRelease && (
+					<ReleaseCard release={nextRelease} />
+				)}
 			</div>
 
 			{/* Previous Releases */}

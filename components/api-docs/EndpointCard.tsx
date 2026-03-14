@@ -31,7 +31,7 @@ export function EndpointCard({
 					</h2>
 				)}
 				<div className="flex items-center gap-3 flex-wrap">
-					<MethodBadge method={operation.method} />
+					<MethodBadge method={operation.method} className="text-lg" />
 					<code className="text-lg font-mono font-semibold break-all">
 						{operation.path}
 					</code>

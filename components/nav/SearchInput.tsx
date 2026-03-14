@@ -85,7 +85,7 @@ export const SearchInput: FC<PropsWithStyle> = ({ className }) => {
 								<div className="flex items-center gap-2">
 									<MethodBadge
 										method={item.method || ""}
-										className="text-[9px] px-1.5 py-0 h-4 scale-[0.9] shrink-0"
+										className="text-xs shrink-0"
 									/>
 									<span className="font-mono text-xs text-muted-foreground truncate">
 										{item.path}

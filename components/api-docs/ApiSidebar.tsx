@@ -127,12 +127,10 @@ export function NavApiEndpoints() {
 																	{op.summary || op.operationId || "Endpoint"}
 																</span>
 																<div className="flex items-center gap-1">
-																	<span className="min-w-[2.5rem] inline-flex justify-start shrink-0 scale-[0.8]">
-																		<MethodBadge
-																			method={op.method}
-																			className="text-[9px] px-1.5 py-0 h-4"
-																		/>
-																	</span>
+																	<MethodBadge
+																		method={op.method}
+																		className="text-[10px] shrink-0"
+																	/>
 																	<span className="font-mono text-[10px] text-muted-foreground/70 truncate">
 																		{op.path}
 																	</span>

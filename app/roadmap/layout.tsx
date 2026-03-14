@@ -3,8 +3,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Roadmap",
-	description:
-		"Stay up to date with our latest releases and what's coming next.",
+	description: "Stay up to date with our latest releases and what's coming next.",
 };
 
 export default function RoadmapLayout({
