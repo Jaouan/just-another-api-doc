@@ -66,8 +66,8 @@ function ReleaseCard({ release }: { release: Release }) {
 		<Card className="flex flex-col">
 			<CardHeader className="pb-4">
 				<div className="flex items-center justify-between">
+					<CardTitle className="text-xl">{release.version}</CardTitle>
 					<div className="flex items-center gap-2">
-						<CardTitle className="text-xl">{release.version}</CardTitle>
 						{release.status === "current" && (
 							<Badge variant="outline" className="bg-primary/10 text-primary border-primary/20">
 								Current
@@ -79,7 +79,6 @@ function ReleaseCard({ release }: { release: Release }) {
 							</Badge>
 						)}
 					</div>
-					<CardDescription className="font-mono text-xs">{release.date}</CardDescription>
 				</div>
 			</CardHeader>
 			<CardContent className="space-y-4 flex-1">
@@ -94,11 +93,11 @@ function ReleaseCard({ release }: { release: Release }) {
 									<Icon className="size-3.5" />
 								</div>
 							</div>
-							<div className="flex flex-col gap-0.5 min-w-0">
+							<div className="flex flex-col gap-0 min-w-0">
 								<h4 className="text-sm font-medium leading-none mt-1">
 									{note.title}
 								</h4>
-								<p className="text-sm text-muted-foreground mt-1">
+								<p className="text-sm text-muted-foreground mt-0.5">
 									{note.description}
 								</p>
 							</div>
