@@ -131,20 +131,10 @@ export default function RoadmapPage() {
 			{/* Current & Next */}
 			<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 				{currentRelease && (
-					<div className="space-y-4">
-						<h2 className="text-lg font-semibold flex items-center gap-2">
-							Current Release
-						</h2>
-						<ReleaseCard release={currentRelease} />
-					</div>
+					<ReleaseCard release={currentRelease} />
 				)}
 				{nextRelease && (
-					<div className="space-y-4">
-						<h2 className="text-lg font-semibold flex items-center gap-2">
-							Coming Next
-						</h2>
-						<ReleaseCard release={nextRelease} />
-					</div>
+					<ReleaseCard release={nextRelease} />
 				)}
 			</div>
 
