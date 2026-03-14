@@ -135,7 +135,7 @@ export function NavApiEndpoints() {
 																	</span>
 																</div>
 																{op.summary && (
-																	<span className="text-[10px] text-muted-foreground truncate w-full pl-1">
+																	<span className="text-[10px] text-muted-foreground/70 truncate w-full pl-1">
 																		{op.summary}
 																	</span>
 																)}
