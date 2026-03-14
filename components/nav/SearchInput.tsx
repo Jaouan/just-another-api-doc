@@ -82,7 +82,7 @@ export const SearchInput: FC<PropsWithStyle> = ({ className }) => {
 								<span className="text-sm font-medium truncate w-full first-letter:capitalize">
 									{item.summary || item.title || item.description || "Endpoint"}
 								</span>
-								<div className="flex items-center gap-2">
+								<div className="flex items-center gap-1">
 									<MethodBadge
 										method={item.method || ""}
 										className="text-xs shrink-0"

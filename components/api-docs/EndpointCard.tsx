@@ -25,25 +25,28 @@ export function EndpointCard({
 		<div className="space-y-8">
 			{/* Header */}
 			<div className="space-y-3">
-				{operation.summary && (
-					<h2 className="text-xl font-semibold first-letter:capitalize">
-						{operation.summary}
-					</h2>
-				)}
 				<div className="flex items-center gap-3 flex-wrap">
-					<MethodBadge method={operation.method} className="text-lg" />
-					<code className="text-lg font-mono font-semibold break-all">
-						{operation.path}
-					</code>
+					<h2 className="text-xl font-bold tracking-tight first-letter:capitalize">
+						{operation.summary || operation.operationId}
+					</h2>
 					{operation.deprecated && (
 						<Badge
 							variant="outline"
-							className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/25 gap-1"
+							className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/25 gap-1 ml-auto"
 						>
 							<AlertTriangle className="size-3" />
 							Deprecated
 						</Badge>
 					)}
+				</div>
+				<div className="flex items-center gap-2">
+					<MethodBadge
+						method={operation.method}
+						className="text-lg w-fit shrink-0"
+					/>
+					<code className="text-lg font-mono font-semibold break-all text-foreground">
+						{operation.path}
+					</code>
 				</div>
 				{!customDoc && operation.description && (
 					<p className="text-muted-foreground leading-relaxed">

@@ -123,10 +123,10 @@ export function NavApiEndpoints() {
 													>
 														<Link href={`/docs/api/${op.operationId}`}>
 															<div className="flex flex-col gap-0.5 w-full">
-																<span className="text-sm font-medium truncate w-full first-letter:capitalize">
-																	{op.summary || op.operationId || "Endpoint"}
+																<span className="text-sm font-medium truncate first-letter:capitalize pl-1">
+																	{op.summary || op.operationId}
 																</span>
-																<div className="flex items-center gap-1">
+																<div className="flex items-center gap-1 pl-1">
 																	<MethodBadge
 																		method={op.method}
 																		className="text-[10px] shrink-0"

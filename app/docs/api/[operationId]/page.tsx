@@ -24,7 +24,7 @@ export async function generateMetadata({
 
 	return {
 		title: `${operation.summary || operation.operationId} — API Reference`,
-		description: `${operation.method} ${operation.path}`,
+		description: operation.description,
 	};
 }
 
