@@ -72,7 +72,7 @@ export const SearchInput: FC<PropsWithStyle> = ({ className }) => {
 						{apiItems.map((item, index) => (
 							<CommandItem
 								key={index}
-								value={`${item.method} ${item.path} ${item.title} ${item.description}`}
+								value={`${item.method} ${item.path} ${item.title} ${item.summary || item.description}`}
 								onSelect={() => {
 									setOpen(false);
 									redirect(item.url);
@@ -88,9 +88,9 @@ export const SearchInput: FC<PropsWithStyle> = ({ className }) => {
 										{item.path}
 									</span>
 								</div>
-								{item.description && (
+								{item.summary && (
 									<span className="text-xs text-muted-foreground truncate w-full">
-										{item.description}
+										{item.summary}
 									</span>
 								)}
 							</CommandItem>

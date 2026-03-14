@@ -1,5 +1,5 @@
 // @ts-expect-error — YAML file is handled by yaml-loader in webpack config
-import swaggerSpec from "@/api-docs/api.aos3.yml";
+import swaggerSpec from "@/public/api.aos3.yml";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 

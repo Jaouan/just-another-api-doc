@@ -11,6 +11,8 @@ type SearchItem = {
 	path?: string;
 	/** Short description */
 	description?: string;
+	/** Endpoint summary */
+	summary?: string;
 };
 
 type SearchState = {
@@ -24,6 +26,7 @@ const apiEndpoints: SearchItem[] = getAllOperations().map((op) => ({
 	method: op.method.toUpperCase(),
 	path: op.path,
 	description: op.description || op.summary,
+	summary: op.summary,
 }));
 
 export const useSearchStore = create<SearchState>(() => ({
