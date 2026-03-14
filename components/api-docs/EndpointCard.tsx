@@ -22,39 +22,40 @@ export function EndpointCard({
 	const bodySchema = bodyParam?.schema ? resolveSchema(bodyParam.schema) : null;
 
 	return (
-		<div className="space-y-8">
-			{/* Header */}
-			<div className="space-y-3">
-				<div className="flex items-center gap-3 flex-wrap">
-					<MethodBadge method={operation.method} />
-					<code className="text-lg font-mono font-semibold break-all">
-						{operation.path}
-					</code>
-					{operation.deprecated && (
-						<Badge
-							variant="outline"
-							className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/25 gap-1"
-						>
-							<AlertTriangle className="size-3" />
-							Deprecated
-						</Badge>
+		<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+			<div className="space-y-8">
+				{/* Header */}
+				<div className="space-y-3">
+					<div className="flex items-center gap-3 flex-wrap">
+						<MethodBadge method={operation.method} />
+						<code className="text-lg font-mono font-semibold break-all">
+							{operation.path}
+						</code>
+						{operation.deprecated && (
+							<Badge
+								variant="outline"
+								className="bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/25 gap-1"
+							>
+								<AlertTriangle className="size-3" />
+								Deprecated
+							</Badge>
+						)}
+					</div>
+					{operation.summary && (
+						<h2 className="text-xl font-semibold">{operation.summary}</h2>
+					)}
+					{!customDoc && operation.description && (
+						<p className="text-muted-foreground leading-relaxed">
+							{operation.description}
+						</p>
 					)}
 				</div>
-				{operation.summary && (
-					<h2 className="text-xl font-semibold">{operation.summary}</h2>
-				)}
-				{!customDoc && operation.description && (
-					<p className="text-muted-foreground leading-relaxed">
-						{operation.description}
-					</p>
-				)}
-			</div>
 
-			{/* Custom documentation from MDX */}
-			{customDoc}
+				{/* Custom documentation from MDX */}
+				{customDoc}
 
-			{/* Security */}
-			{/*operation.security && operation.security.length > 0 && (
+				{/* Security */}
+				{/*operation.security && operation.security.length > 0 && (
                 <div className="space-y-2">
                     <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
                         Authorization
@@ -89,51 +90,54 @@ export function EndpointCard({
                 </div>
             )*/}
 
-			{/* Parameters */}
-			{nonBodyParams.length > 0 && (
-				<div className="space-y-3">
-					<h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-						Parameters
-					</h3>
-					<ParameterTable parameters={nonBodyParams} />
-				</div>
-			)}
-
-			{/* Request Body */}
-			{bodyParam && bodySchema && (
-				<div className="space-y-3">
-					<h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-						Request Body
-					</h3>
-					{bodyParam.description && (
-						<p className="text-sm text-muted-foreground">
-							{bodyParam.description}
-						</p>
-					)}
-					<div className="rounded-lg border bg-card p-4">
-						<SchemaViewer schema={bodySchema} />
+				{/* Parameters */}
+				{nonBodyParams.length > 0 && (
+					<div className="space-y-3">
+						<h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+							Parameters
+						</h3>
+						<ParameterTable parameters={nonBodyParams} />
 					</div>
+				)}
+
+				{/* Request Body */}
+				{bodyParam && bodySchema && (
+					<div className="space-y-3">
+						<h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+							Request Body
+						</h3>
+						{bodyParam.description && (
+							<p className="text-sm text-muted-foreground">
+								{bodyParam.description}
+							</p>
+						)}
+						<div className="rounded-lg border bg-card p-4">
+							<SchemaViewer schema={bodySchema} />
+						</div>
+					</div>
+				)}
+
+				{/* Responses */}
+				<div className="space-y-3">
+					<h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+						Responses
+					</h3>
+					<ResponseSection responses={operation.responses} />
 				</div>
-			)}
-
-			{/* Responses */}
-			<div className="space-y-3">
-				<h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-					Responses
-				</h3>
-				<ResponseSection responses={operation.responses} />
 			</div>
 
-			{/* Code Examples */}
-			<div className="space-y-3">
-				<h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
-					Code Examples
-				</h3>
-				<LiveCodeExamples operation={operation} />
-			</div>
+			<div className="space-y-8 lg:sticky lg:top-20 h-fit">
+				{/* Code Examples */}
+				<div className="space-y-3">
+					<h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+						Code Examples
+					</h3>
+					<LiveCodeExamples operation={operation} />
+				</div>
 
-			{/* Try it out */}
-			<TryItOut operation={operation} />
+				{/* Try it out */}
+				<TryItOut operation={operation} />
+			</div>
 		</div>
 	);
 }
